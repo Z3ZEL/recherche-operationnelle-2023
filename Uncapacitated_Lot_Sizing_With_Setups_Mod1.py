@@ -1,4 +1,4 @@
-
+from tool.array_printer import TwoDimArray
 
 datafileName = 'Instances_ULS/Toy_Instance.txt'
 
@@ -47,26 +47,21 @@ y = [model.add_var(var_type=INTEGER, name="y_"+str(i),lb=0, ub=1) for i in range
 x = [model.add_var(var_type=INTEGER, name="x_"+str(i),lb=0) for i in range(nbPeriodes)]
 s = [model.add_var(var_type=INTEGER, name="s_"+str(i),lb=0) for i in range(nbPeriodes)]
 
-M = max(demandes)
+M = sum(demandes)
 print("Max de la demande : " + str(M))
 
 
-model.objective = minimize( xsum( couts[i]*x[i] for i in range(nbPeriodes) ) + xsum( y[i]*cfixes[i] for i in range(nbPeriodes) ) + xsum( cstock*s[i] for i in range(nbPeriodes) ) )
+model.objective = minimize( xsum( couts[i]*x[i] + cfixes[i]*y[i] + cstock*s[i] for i in range(nbPeriodes) ) )
 
 for i in range(nbPeriodes):
-    model.add_constr( x[i] + s[i] >= demandes[i], name="c1_"+str(i) )
-    model.add_constr( x[i] <= M*y[i], name="c2_"+str(i) )
-    # model.add_constr( s[i] <= M*(1-y[i]), name="c3_"+str(i) )
+    model.add_constr( x[i] <= M*y[i] , name="c1_"+str(i) )
 
 
-model.add_constr( x[0] <= M*y[0], name="c4_"+str(0) )
-model.add_constr( s[0] <= 0, name="c5_"+str(0) )
+model.add_constr( s[0] + demandes[0] == x[0]);
+
+
 for i in range(1,nbPeriodes):
-    # model.add_constr( s[i] == (s[i-1] + x[i-1]) - demandes[i-1] + (x[i]-demandes[i]), name="c5_"+str(i) )
-    # model.add_constr( s[i] == x[i] - demandes[i], name="c5_"+str(i) )
-    model.add_constr( xsum( x[i] + s[i] for i in range(i) ) >= xsum( demandes[i] for i in range(i) ), name="c5_"+str(i) )
-
-
+    model.add_constr( s[i] + demandes[i] == x[i] + s[i-1] , name="c2_"+str(i) )
 
 
 
@@ -93,8 +88,8 @@ if model.num_solutions>0:
     print("-> Valeur de la fonction objectif de la solution calculée : ",  model.objective_value)
 
     print("-> Valeurs des variables de la solution calculée : ")
-    print("| Periode | Demande | Production | Stock | Production ? |")
-    for i in range(nbPeriodes):
-        print("| " + str(i) + "     | " + str(demandes[i]) + "       | " + str(x[i].x) + "       | " + str(s[i].x) + "      | " + str( "oui" if y[i].x == 1 else "non" ) + "       |")
-        
+    names = ["Période", "Demande", "Production", "Stock", "Production ?"]
+    array = [[i, demandes[i], x[i].x, s[i].x, "oui" if y[i].x == 1 else "non"] for i in range(nbPeriodes)]
 
+    print(TwoDimArray(array, names))
+    
