@@ -1,0 +1,83 @@
+Welcome to the CBC MILP Solver 
+Version: Trunk
+Build Date: Oct 28 2021 
+
+Starting solution of the Linear programming relaxation problem using Primal Simplex
+
+Coin0506I Presolve 20 (-22) rows, 41 (-22) columns and 60 (-44) elements
+Clp1000I sum of infeasibilities 30 - average 1.5, 9 fixed columns
+Coin0506I Presolve 8 (-12) rows, 20 (-21) columns and 23 (-37) elements
+Clp0029I End of values pass after 16 iterations
+Clp0000I Optimal - objective value 5442
+Clp0000I Optimal - objective value 5442
+Coin0511I After Postsolve, objective 5442, infeasibilities - dual 0 (0), primal 0 (0)
+Clp0000I Optimal - objective value 5442
+Clp0000I Optimal - objective value 5442
+Clp0000I Optimal - objective value 5442
+Coin0511I After Postsolve, objective 5442, infeasibilities - dual 0 (0), primal 0 (0)
+Clp0032I Optimal objective 5442 - 0 iterations time 0.002, Presolve 0.00, Idiot 0.00
+
+Starting MIP optimization
+Max de la demande : 528
+
+----------------------------------
+Status de la résolution: OPTIMAL
+Solution calculée
+-> Valeur de la fonction objectif de la solution calculée :  13068.0
+-> Valeurs des variables de la solution calculée : 
+Période      Demande      Production   Stock        Production ? 
+-----------------------------------------------------------------
+0            30           206.0        176.0        oui          
+1            25           0.0          151.0        non          
+2            15           0.0          136.0        non          
+3            47           0.0          89.0         non          
+4            34           0.0          55.0         non          
+5            10           0.0          45.0         non          
+6            15           0.0          30.0         non          
+7            30           0.0          0.0          non          
+8            25           322.0        297.0        oui          
+9            15           0.0          282.0        non          
+10           47           0.0          235.0        non          
+11           34           0.0          201.0        non          
+12           10           0.0          191.0        non          
+13           15           0.0          176.0        non          
+14           30           0.0          146.0        non          
+15           25           0.0          121.0        non          
+16           15           0.0          106.0        non          
+17           47           0.0          59.0         non          
+18           34           0.0          25.0         non          
+19           10           0.0          15.0         non          
+20           15           0.0          0.0          non          
+
+Cgl0004I processed model has 40 rows, 61 columns (61 integer (20 of which binary)) and 100 elements
+Coin3009W Conflict graph built in 0.000 seconds, density: 0.267%
+Cgl0015I Clique Strengthening extended 0 cliques, 0 were dominated
+Cbc0045I Nauty did not find any useful orbits in time 0
+Cbc0012I Integer solution of 59617 found by DiveCoefficient after 0 iterations and 0 nodes (0.00 seconds)
+Cbc0012I Integer solution of 35550 found by DiveCoefficient after 1521 iterations and 0 nodes (0.19 seconds)
+Cbc0031I 10 added rows had average density of 47
+Cbc0013I At root node, 10 cuts changed objective from 8219.2727 to 11096.407 in 100 passes
+Cbc0014I Cut generator 0 (Probing) - 146 row cuts average 2.0 elements, 9 column cuts (9 active)  in 0.023 seconds - new frequency is 1
+Cbc0014I Cut generator 1 (Gomory) - 1051 row cuts average 48.3 elements, 0 column cuts (0 active)  in 0.008 seconds - new frequency is 1
+Cbc0014I Cut generator 2 (Knapsack) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.005 seconds - new frequency is -100
+Cbc0014I Cut generator 3 (Clique) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.007 seconds - new frequency is -100
+Cbc0014I Cut generator 4 (OddWheel) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.000 seconds - new frequency is -100
+Cbc0014I Cut generator 5 (MixedIntegerRounding2) - 11 row cuts average 16.5 elements, 0 column cuts (0 active)  in 0.020 seconds - new frequency is -100
+Cbc0014I Cut generator 6 (FlowCover) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.002 seconds - new frequency is -100
+Cbc0014I Cut generator 7 (TwoMirCuts) - 84 row cuts average 16.1 elements, 0 column cuts (0 active)  in 0.001 seconds - new frequency is 1
+Cbc0014I Cut generator 8 (ZeroHalf) - 14 row cuts average 2.0 elements, 0 column cuts (0 active)  in 0.025 seconds - new frequency is -100
+Cbc0012I Integer solution of 26983 found by DiveCoefficient after 1548 iterations and 1 nodes (0.20 seconds)
+Cbc0012I Integer solution of 20975 found by DiveCoefficient after 1551 iterations and 2 nodes (0.20 seconds)
+Cbc0012I Integer solution of 20249 found by DiveCoefficient after 1873 iterations and 9 nodes (0.26 seconds)
+Cbc0012I Integer solution of 16225 found by rounding after 2064 iterations and 12 nodes (0.27 seconds)
+Cbc0012I Integer solution of 16212 found by DiveCoefficient after 2067 iterations and 13 nodes (0.27 seconds)
+Cbc0012I Integer solution of 16180 found by DiveCoefficient after 2072 iterations and 13 nodes (0.27 seconds)
+Cbc0004I Integer solution of 14651 found after 2106 iterations and 14 nodes (0.28 seconds)
+Cbc0016I Integer solution of 13224 found by strong branching after 2117 iterations and 15 nodes (0.28 seconds)
+Cbc0016I Integer solution of 13221 found by strong branching after 2299 iterations and 24 nodes (0.30 seconds)
+Cbc0016I Integer solution of 13068 found by strong branching after 2614 iterations and 30 nodes (0.32 seconds)
+Cbc0001I Search completed - best objective 13068, took 2614 iterations and 30 nodes (0.32 seconds)
+Cbc0032I Strong branching done 494 times (2467 iterations), fathomed 5 nodes and fixed 3 variables
+Cbc0035I Maximum depth 10, 30 variables fixed on reduced cost
+Total time (CPU seconds):       0.33   (Wallclock seconds):       0.33
+

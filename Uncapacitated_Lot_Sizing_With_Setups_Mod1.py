@@ -72,11 +72,11 @@ for i in range(1,nbPeriodes):
 
 
 
-
-
+#Commande pour recuperer les résultats après les avoirs enregistré dans un fichié
+#find out_model1/ -type f -exec grep -a "Status" {} +
 # model.write("test.lp")
 
-status = model.optimize()
+status = model.optimize(max_seconds=180)
 
 print("\n----------------------------------")
 if status == OptimizationStatus.OPTIMAL:
