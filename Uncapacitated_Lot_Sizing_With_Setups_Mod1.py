@@ -1,6 +1,13 @@
 from tool.array_printer import TwoDimArray
+import os
+
 
 datafileName = 'Instances_ULS/Toy_Instance.txt'
+
+if(len(os.sys.argv)>1):
+    datafileName = os.sys.argv[1]
+
+
 
 with open(datafileName, "r") as file:
     line = file.readline()
@@ -29,11 +36,11 @@ with open(datafileName, "r") as file:
     lineTab = line.split()
     cstock = int(lineTab[0])
 
-print(nbPeriodes)
-print(demandes)
-print(couts)
-print(cfixes)
-print(cstock)
+# print(nbPeriodes)
+# print(demandes)
+# print(couts)
+# print(cfixes)
+# print(cstock)
 
 
 
