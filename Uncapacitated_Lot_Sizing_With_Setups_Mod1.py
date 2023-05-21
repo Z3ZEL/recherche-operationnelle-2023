@@ -1,11 +1,13 @@
 from tool.array_printer import TwoDimArray
 import os
-
+from math import *
 
 datafileName = 'Instances_ULS/Toy_Instance.txt'
 
 if(len(os.sys.argv)>1):
     datafileName = os.sys.argv[1]
+
+
 
 
 
@@ -49,13 +51,13 @@ from mip import *
 import time
 
 model = Model(name = "ULS", solver_name="CBC")
+model.verbose = 0
 
 y = [model.add_var(var_type=INTEGER, name="y_"+str(i),lb=0, ub=1) for i in range(nbPeriodes)]
 x = [model.add_var(var_type=INTEGER, name="x_"+str(i),lb=0) for i in range(nbPeriodes)]
 s = [model.add_var(var_type=INTEGER, name="s_"+str(i),lb=0) for i in range(nbPeriodes)]
 
 M = sum(demandes)
-print("Max de la demande : " + str(M))
 
 
 model.objective = minimize( xsum( couts[i]*x[i] + cfixes[i]*y[i] + cstock*s[i] for i in range(nbPeriodes) ) )
@@ -75,28 +77,52 @@ for i in range(1,nbPeriodes):
 #Commande pour recuperer les résultats après les avoirs enregistré dans un fichié
 #find out_model1/ -type f -exec grep -a "Status" {} +
 # model.write("test.lp")
+linear_solution = 0;
+print("| ", end="")
+
+linear_status = model.optimize(max_seconds=180, relax=True)
+if model.num_solutions>0:
+    print(model.objective_value, end=" | ");
+    linear_solution = model.objective_value;
+
+start_time = time.time()
 
 status = model.optimize(max_seconds=180)
 
-print("\n----------------------------------")
-if status == OptimizationStatus.OPTIMAL:
-    print("Status de la résolution: OPTIMAL")
-elif status == OptimizationStatus.FEASIBLE:
-    print("Status de la résolution: TEMPS LIMITE et SOLUTION REALISABLE CALCULEE")
-elif status == OptimizationStatus.NO_SOLUTION_FOUND:
-    print("Status de la résolution: TEMPS LIMITE et AUCUNE SOLUTION CALCULEE")
-elif status == OptimizationStatus.INFEASIBLE or status == OptimizationStatus.INT_INFEASIBLE:
-    print("Status de la résolution: IRREALISABLE")
-elif status == OptimizationStatus.UNBOUNDED:
-    print("Status de la résolution: NON BORNE")
+delta = time.time() - start_time
+delta = round(delta, 2)
 
+
+def str_status(status):
+    if status == OptimizationStatus.OPTIMAL:
+        return "OPTIMAL"
+    elif status == OptimizationStatus.FEASIBLE:
+        return "FEASIBLE"
+    elif status == OptimizationStatus.NO_SOLUTION_FOUND:
+        return "NO_SOLUTION_FOUND"
+    elif status == OptimizationStatus.INFEASIBLE:
+        return "INFEASIBLE"
+    elif status == OptimizationStatus.UNBOUNDED:
+        return "UNBOUNDED"
+    elif status == OptimizationStatus.NOT_SOLVED:
+        return "NOT_SOLVED"
+    elif status == OptimizationStatus.INFEASIBLE_OR_UNBOUNDED:
+        return "INFEASIBLE_OR_UNBOUNDED"
+    else:
+        return "UNKNOWN"
+                                
 if model.num_solutions>0:
-    print("Solution calculée")
-    print("-> Valeur de la fonction objectif de la solution calculée : ",  model.objective_value)
+    print(str_status(model.status), end=" | ");
+    print(model.objective_value, end=" | ");
+    print(round((linear_solution/model.objective_value)*100), end=" | ");
+    #NUMBER OF NODE IN THE BRANCH AND BOUND TREE
+    print(model.max_nodes, end=" | ");
+    print(delta, end=" |");
+    #resolution time
+    # print(model.solve_time, end=" | ");
+    # print("-> Valeurs des variables de la solution calculée : ")
+    # names = ["Période", "Demande", "Production", "Stock", "Production ?"]
+    # array = [[i, demandes[i], x[i].x, s[i].x, "oui" if y[i].x == 1 else "non"] for i in range(nbPeriodes)]
 
-    print("-> Valeurs des variables de la solution calculée : ")
-    names = ["Période", "Demande", "Production", "Stock", "Production ?"]
-    array = [[i, demandes[i], x[i].x, s[i].x, "oui" if y[i].x == 1 else "non"] for i in range(nbPeriodes)]
-
-    print(TwoDimArray(array, names))
+    # print(TwoDimArray(array, names))
     

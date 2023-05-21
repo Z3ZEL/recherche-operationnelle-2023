@@ -49,42 +49,44 @@
 
 ### Premier modèle
 
-Nous avons appliqué le modèle à plusieurs instances de test, et nous avons obtenu les résultats suivants :
+Nous avons appliqué le modèle à plusieurs instances de test, et nous avons obtenu les résultats suivants, les résultats contiennent la valeur de la relaxation linéaire, la valeur et le status de la meilleure solution réalisable calculée, l'écart en % entre la relaxation linéaire et la solution réalisable calculée, et le temps de résolution en secondes, et enfin le nombre de noeuds de l'arbre de branchement.
+|Nom de l'instance|Relaxation Linéaire|Status de la solution|Valeur de la solution | Rapport en % | Nombre de noeud | Temps de résolution (s) |
+|-----------------|-------------------|---------------------|----------------------|--------------|----------------|------------------------|
+|Instance120.1   | 28159.0 | REALISABLE | 77297.0 | 36 | 2147483647 | 180.21 |
+|Instance120.10   | 28515.0 | REALISABLE | 86355.0 | 33 | 2147483647 | 180.27 |
+|Instance120.2   | 27095.0 | REALISABLE | 68779.0 | 39 | 2147483647 | 180.15 |
+|Instance120.3   | 27525.0 | REALISABLE | 91756.0 | 30 | 2147483647 | 180.3 |
+|Instance120.4   | 26533.0 | REALISABLE | 86575.0 | 31 | 2147483647 | 180.27 |
+|Instance120.5   | 28658.0 | REALISABLE | 97629.0 | 29 | 2147483647 | 180.19 |
+|Instance120.6   | 26902.0 | REALISABLE | 65754.0 | 41 | 2147483647 | 180.35 |
+|Instance120.7   | 28346.0 | REALISABLE | 83270.0 | 34 | 2147483647 | 180.76 |
+|Instance120.8   | 24200.0 | REALISABLE | 178280.0 | 14 | 2147483647 | 1210.41 |
+|Instance120.9   | 29066.0 | REALISABLE | 89321.0 | 33 | 2147483647 | 180.3 |
+|Instance21.1   | 5442.0 | OPTIMALE | 13068.0 | 42 | 2147483647 | 0.6 |
+|Instance60.1   | 14093.0 | REALISABLE | 29739.0 | 47 | 2147483647 | 180.02 |
+|Instance60.10   | 14003.0 | REALISABLE | 31967.0 | 44 | 2147483647 | 1220.05 |
+|Instance60.2   | 14297.0 | REALISABLE | 41837.0 | 34 | 2147483647 | 78914.08 |
+|Instance60.3   | 14223.0 | REALISABLE | 34081.0 | 42 | 2147483647 | 180.05 |
+|Instance60.4   | 13505.0 | OPTIMALE | 31131.0 | 43 | 2147483647 | 28.94 |
+|Instance60.5   | 14145.0 | REALISABLE | 36112.0 | 39 | 2147483647 | 180.09 |
+|Instance60.6   | 12990.0 | OPTIMALE | 25186.0 | 52 | 2147483647 | 123.45 |
+|Instance60.7   | 13906.0 | REALISABLE | 30853.0 | 45 | 2147483647 | 180.05 |
+|Instance60.8   | 12821.0 | OPTIMALE | 27962.0 | 46 | 2147483647 | 75.46 |
+|Instance60.9   | 15532.0 | REALISABLE | 35527.0 | 44 | 2147483647 | 534.93 |
+|Instance90.1   | 21004.0 | REALISABLE | 51363.0 | 41 | 2147483647 | 180.28 |
+|Instance90.10   | 21126.0 | REALISABLE | 57878.0 | 37 | 2147483647 | 180.16 |
+|Instance90.2   | 20672.0 | REALISABLE | 46826.0 | 44 | 2147483647 | 328.13 |
+|Instance90.3   | 20573.0 | REALISABLE | 58132.0 | 35 | 2147483647 | 180.21 |
+|Instance90.4   | 19671.0 | REALISABLE | 53897.0 | 36 | 2147483647 | 180.18 |
+|Instance90.5   | 21131.0 | REALISABLE | 65813.0 | 32 | 2147483647 | 1385.02 |
+|Instance90.6   | 18659.0 | REALISABLE | 73334.0 | 25 | 2147483647 | 367.41 |
+|Instance90.7   | 21314.0 | REALISABLE | 54913.0 | 39 | 2147483647 | 180.37 |
+|Instance90.8   | 18996.0 | REALISABLE | 49063.0 | 39 | 2147483647 | 638.67 |
+|Instance90.9   | 21773.0 | REALISABLE | 60042.0 | 36 | 2147483647 | 180.26 |
+|Toy_Instance   | 1114.0 | OPTIMALE | 1788.0 | 62 | 2147483647 | 0.09 |
 
-```
-Instance120.10 TEMPS LIMITE et SOLUTION REALISABLE CALCULEE ->  87317.0
-Instance120.1 TEMPS LIMITE et SOLUTION REALISABLE CALCULEE ->  81016.0
-Instance120.2 TEMPS LIMITE et SOLUTION REALISABLE CALCULEE ->  68779.0
-Instance120.3 TEMPS LIMITE et SOLUTION REALISABLE CALCULEE ->  91756.0
-Instance120.4 TEMPS LIMITE et SOLUTION REALISABLE CALCULEE ->  86080.0
-Instance120.5 TEMPS LIMITE et SOLUTION REALISABLE CALCULEE ->  98123.0
-Instance120.6 TEMPS LIMITE et SOLUTION REALISABLE CALCULEE ->  65754.0
-Instance120.7 TEMPS LIMITE et SOLUTION REALISABLE CALCULEE ->  82356.0
-Instance120.8 TEMPS LIMITE et SOLUTION REALISABLE CALCULEE ->  74145.0
-Instance120.9 TEMPS LIMITE et SOLUTION REALISABLE CALCULEE ->  88495.0
-Instance21.1 OPTIMAL ->  13068.0
-Instance60.10 OPTIMAL ->  31809.0
-Instance60.1 OPTIMAL ->  29739.0
-Instance60.2 OPTIMAL ->  27572.0
-Instance60.3 TEMPS LIMITE et SOLUTION REALISABLE CALCULE ->  34081.0
-Instance60.4 OPTIMAL ->  31131.0
-Instance60.5 TEMPS LIMITE et SOLUTION REALISABLE CALCULE ->  35693.0
-Instance60.6 OPTIMAL ->  25186.0
-Instance60.7 OPTIMAL ->  30853.0
-Instance60.8 OPTIMAL ->  27962.0
-Instance60.9 TEMPS LIMITE et SOLUTION REALISABLE CALCULE ->  35492.0
-Instance90.10 TEMPS LIMITE et SOLUTION REALISABLE CALCULEE ->  57878.0
-Instance90.1 TEMPS LIMITE et SOLUTION REALISABLE CALCULE ->  51363.0
-Instance90.2 TEMPS LIMITE et SOLUTION REALISABLE CALCULE ->  46826.0
-Instance90.3 TEMPS LIMITE et SOLUTION REALISABLE CALCULE ->  57613.0
-Instance90.4 TEMPS LIMITE et SOLUTION REALISABLE CALCULE ->  53897.0
-Instance90.5 TEMPS LIMITE et SOLUTION REALISABLE CALCULE ->  64943.0
-Instance90.6 TEMPS LIMITE et SOLUTION REALISABLE CALCULE ->  42086.0
-Instance90.7 TEMPS LIMITE et SOLUTION REALISABLE CALCULE ->  54913.0
-Instance90.8 TEMPS LIMITE et SOLUTION REALISABLE CALCULE ->  49063.0
-Instance90.9 TEMPS LIMITE et SOLUTION REALISABLE CALCULE ->  59618.0
-Toy_Instance OPTIMAL->  1788.0
-```
+
+
 Nous avons récolté les résultats pour chacunes des variables, nous pouvons détailler celle de *Toy_Instance* :
 
 ```
@@ -99,6 +101,8 @@ Période      Demande      Production   Stock        Production ?
 6            15           0.0          0.0          non
 ```
 > Résultat détaillé de l'instance : `Toy_Instance.txt`
+
+Rappelons que la solution est **OPTIMALE**, ici le peu de période induit une résolution rapide, en effet le temps de résolution est de **0.09s**. 
 
 
 

@@ -7,6 +7,6 @@ set "dossier=C:/Users/esteb/Documents/recherche-operationnelle-2023/Instances_UL
 for %%F in ("%dossier%\*") do (
     :: Vérifier si l'élément est un fichier
     echo "Traitement du fichier %%F"
-    python Uncapacitated_Lot_Sizing_With_Setups_Mod1.py %%F > "C:/Users/esteb/Documents/recherche-operationnelle-2023/out/%%~nF_out.txt"
-    
+    :: Ptyhon script
+    python Uncapacitated_Lot_Sizing_With_Setups_Mod1.py %%F > "C:/Users/esteb/Documents/recherche-operationnelle-2023/out_model1/%%~nF.txt"
 )
