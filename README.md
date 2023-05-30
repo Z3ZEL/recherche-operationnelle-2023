@@ -61,6 +61,7 @@
     s.c. \space\space \sum_{i=1}^{j} (x_{i,j}) = d_{j}, \space\space \forall j \in \{0,...,n\} \\
     x_{i,j} \leq My_{i}, \space\space \forall i,j \in \{1,...,n\} \\
   $$
+  
   Pour que le modèle soit valide, la constante M doit être au moins égale à la plus grande demande possible. On peut définir M comme la somme des $d_{i}$ $\forall i \in \{0,...,n\}, ce qui assure que la contrainte soir toujours respectée.
 ## Résultats
 
