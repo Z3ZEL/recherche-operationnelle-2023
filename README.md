@@ -44,7 +44,24 @@
 
 
 ### Deuxième modèle
-
+  En partant de l'énnoncé du problème, et des variables suivantes :
+  - Les variables définies précedemment dans le modèle 1 ( $c_{i}$, $h$, $d_{i}$ )
+  - $x_{i,j}$ : quantité produite à la période $i$ pour la demande de la période $j$
+  - $y_{i}$ : {0,1} si il nous produisons pendant la période $j$
+  avec $i \in \{0,..., n\}$
+  
+  Et en prenant en compte les contraintes suivantes:
+  - La demande pour chaque mois j doit être satisfaite
+  - On ne peux pas profuire pour une demande future sans produire dans le mois actuel
+  -  
+  Nous pouvons écrire le modèle PLNE suivant :
+  
+  $$
+    min \sum_{i,j, i \leq j}^{n} (c_{i}x_{i,j} + h(j-i)x{i,j} + f_iy_{i}) \\
+    s.c. \space\space \sum_{i=1}^{j} (x_{i,j}) = d_{j}, \space\space \forall j \in \{0,...,n\} \\
+    x_{i,j} \leq My_{i}, \space\space \forall i,j \in \{1,...,n\} \\
+  $$
+  Pour que le modèle soit valide, la constante M doit être au moins égale à la plus grande demande possible. On peut définir M comme la somme des $d_{i}$ $\forall i \in \{0,...,n\}, ce qui assure que la contrainte soir toujours respectée.
 ## Résultats
 
 ### Premier modèle
