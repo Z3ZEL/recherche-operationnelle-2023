@@ -1,31 +1,33 @@
 
-datafileName = 'Instances_USILS/Instance120.1.txt'
+datafileName = 'Instances_ULS/Toy_Instance.txt'
+
+from tool.array_printer import TwoDimArray
 
 with open(datafileName, "r") as file:
-    line = file.readline()  
-    lineTab = line.split()    
+    line = file.readline()
+    lineTab = line.split()
     nbPeriodes = int(lineTab[0])
-    
-    line = file.readline()  
+
+    line = file.readline()
     lineTab = line.split()
     demandes = []
     for i in range(nbPeriodes):
         demandes.append(int(lineTab[i]))
-        
-    line = file.readline()  
+
+    line = file.readline()
     lineTab = line.split()
     couts = []
     for i in range(nbPeriodes):
         couts.append(int(lineTab[i]))
 
-    line = file.readline()  
+    line = file.readline()
     lineTab = line.split()
     cfixes = []
     for i in range(nbPeriodes):
         cfixes.append(int(lineTab[i]))
-    
-    line = file.readline()  
-    lineTab = line.split()    
+
+    line = file.readline()
+    lineTab = line.split()
     cstock = int(lineTab[0])
 
 #print(nbPeriodes)
@@ -40,9 +42,14 @@ import time
 
 model2 = Model(name = "ULS", solver_name="CBC")
 
-# y = 
-# x = 
+y = [model2.add_var(var_type=mip.BINARY, name="y_"+str(i)) for i in range(nbPeriodes)]
+x = [(model2.add_var(var_type=mip.BINARY, name="x_"+str(i)+"_"+str(j)) for i in range(j+1) ) for j in range(nbPeriodes)]
 
+model2.objective = minimize( xsum(xsum( x[i][j]*demandes[j]*couts[i] for i in range(j+1) ) for j in range(nbPeriodes)) + cstock*xsum(xsum(x[i][j]*demandes[j]*(j-i)  for i in range(j+1)) for j in range(nbPeriodes)) + xsum( cfixes[i]*y[i] for i in range(nbPeriodes) ) )
+
+for j in range(1, nbPeriodes+1):
+    for i in range (j+1):
+        model2.add_constr( xsum( (x[i][j] ) for i in range(j) ) == 1 )
 
 
 
@@ -63,10 +70,16 @@ elif status == OptimizationStatus.INFEASIBLE or status == OptimizationStatus.INT
     print("Status de la résolution: IRREALISABLE")
 elif status == OptimizationStatus.UNBOUNDED:
     print("Status de la résolution: NON BORNE")
-    
+
 if model2.num_solutions>0:
     print("Solution calculée")
     print("-> Valeur de la fonction objectif de la solution calculée : ",  model2.objective_value)
+    #show x i,j
+    # print("-> Valeur des variables x i,j de la solution calculée : ")
+    # printer = TwoDimArray(x, ["i/j"] + [str(i) for i in range(nbPeriodes)])
+    # print(printer)
 
-    print("\n \t Implémentez l'affichage de la solution !")
+
+
+
 
