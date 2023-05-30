@@ -102,7 +102,7 @@ Période      Demande      Production   Stock        Production ?
 ```
 > Résultat détaillé de l'instance : `Toy_Instance.txt`
 
-Rappelons que la solution est **OPTIMALE**, ici le peu de période induit une résolution rapide, en effet le temps de résolution est de **0.09s**. 
+Rappelons que la solution est **OPTIMALE** et est de **1788.0**, ici le peu de période induit une résolution rapide, en effet le temps de résolution est de **0.09s**. 
 
 ![Ration_In_Time](img/Figure_1.png)
 Nous pouvons voir sur ce graphique qui représente le rapport entre la relaxation linéaire et le valeur de la solution (qui indique donc de la qualité de la solution trouvée) en fonction du temps de résolution est assez intéréssant. En effet nous pouvons voir que la qualité des solutions optimales (en vert) est globalement supérieur à celles des solutions non optimales. De plus, ce graphique nous confirme que l'algorithme de résolution tourne pour essayer de trouver la solution optimale jusqu'à ce qu'il atteigne le temps limite de résolution (ici 180s).

@@ -43,13 +43,29 @@ import time
 model2 = Model(name = "ULS", solver_name="CBC")
 
 y = [model2.add_var(var_type=mip.BINARY, name="y_"+str(i)) for i in range(nbPeriodes)]
-x = [(model2.add_var(var_type=mip.BINARY, name="x_"+str(i)+"_"+str(j)) for i in range(j+1) ) for j in range(nbPeriodes)]
+x = [[model2.add_var(var_type=mip.BINARY, name="x_"+str(i)+"_"+str(j)) for i in range(j+1) ] for j in range(nbPeriodes)]
 
-model2.objective = minimize( xsum(xsum( x[i][j]*demandes[j]*couts[i] for i in range(j+1) ) for j in range(nbPeriodes)) + cstock*xsum(xsum(x[i][j]*demandes[j]*(j-i)  for i in range(j+1)) for j in range(nbPeriodes)) + xsum( cfixes[i]*y[i] for i in range(nbPeriodes) ) )
+model2.objective = minimize(
+    xsum(
+        xsum( x[j][i]*demandes[j]*couts[i] for i in range(j+1) ) 
+        for j in range(nbPeriodes)
+        )
++ cstock*xsum(
+    xsum(x[j][i]*demandes[j]*(j-i)  for i in range(j+1)) 
+    for j in range(nbPeriodes)
+    )
++ xsum(
+    cfixes[i]*y[i] for i in range(nbPeriodes) 
+    ) 
+    )
 
-for j in range(1, nbPeriodes+1):
-    for i in range (j+1):
-        model2.add_constr( xsum( (x[i][j] ) for i in range(j) ) == 1 )
+for j in range(nbPeriodes):
+    model2.add_constr( xsum( (x[j][i] ) for i in range(j+1) ) == 1 )
+
+M = nbPeriodes
+
+for i in range(nbPeriodes):
+    model2.add_constr( xsum( (x[j][i] ) for j in range(i,nbPeriodes) ) <= M*y[i] )
 
 
 
@@ -76,8 +92,14 @@ if model2.num_solutions>0:
     print("-> Valeur de la fonction objectif de la solution calculée : ",  model2.objective_value)
     #show x i,j
     # print("-> Valeur des variables x i,j de la solution calculée : ")
-    # printer = TwoDimArray(x, ["i/j"] + [str(i) for i in range(nbPeriodes)])
-    # print(printer)
+
+    x_value = [[str(i) +' -> ' +str(j) if x[j][i].x == 1 else "X"  for i in range(j+1)] for j in range(nbPeriodes)]
+    printer = TwoDimArray(x_value,[str(i) for i in range(nbPeriodes)])
+    print(printer)
+
+    #show y i
+    # print("-> Valeur des variables y i de la solution calculée : ")
+
 
 
 
