@@ -17,7 +17,7 @@
 
 ## Les modèles
 ### Premier modèle
-  En partant de l'énnoncé du problème, et des variables suivantes :
+  En partant de l'énoncé du problème, et des variables suivantes :
   - $x_{i}$ : quantité produite à la période $i$
   - $y_{i}$ : {0,1} si une production est effectuée à la période $i$ (1 si on produit, 0 sinon)
   - $s_{i}$ : quantité stockée à la fin du mois $i$
@@ -43,7 +43,32 @@
 
 
 
+
 ### Deuxième modèle
+
+  Une autre alternative de considérer le problème est de le voir uniquement selon des variables binaires :
+
+-  $x_{i,j}$ : 1 si on fabrique à la période *i* les produits pour la demande de la période *j*, 0 sinon. $\forall i\in\{1,\dots,n\}$ et $\forall j\in\{1,\dots,n\}$ avec $i\le{j}$
+-  $y_{i}$ : 1 si on fabrique à la période *i*, 0 sinon. $\forall i\in\{1,\dots,n\}$
+
+A partir de cela nous pouvons écrire le modèle PLNE suivant : 
+$$
+  min \sum_{j=1}^{n}\sum_{i=1}^{j} (x_{i,j}d_jc_i + hx_{i,j}d_i(j-i)) + \sum_{i=1}^{n}(f_iy_i) \\ 
+  sc. \space\space \forall{j}\in\{1,\dots,n\}, \sum_{i=1}^{j}x_{i,j} = 1\\
+  \forall{i}\in\{1,\dots, n\} ,\sum_{j=i}^{n}x_{i,j} \le My_i\\
+$$
+
+  avec $M$ une constante suffisament grande pour que $x_i$ puisse produire jusqu'à toutes les périodes cumulées soit $M = n$.
+
+  de plus nous introduisons les variables suivantes :
+
+  - $c_{i}$ : coût de production à la période $i$
+  - $h$ : coût de stockage (fixe)
+  - $f_{i}$ : coût de mise en marche de la machine à la période $i$
+
+
+
+
 
 ## Résultats
 
@@ -111,6 +136,44 @@ Nous pouvons voir sur ce graphique qui représente le rapport entre la relaxatio
 
 
 ### Deuxième modèle
+
+Nous avons enfin appliqué le même procédé au deuxième modèle et nous avons obtenu les résultats suivants :
+
+|Nom de l'instance|Relaxation Linéaire|Status de la solution|Valeur de la solution | Rapport en % | Nombre de noeud | Temps de résolution (s) |
+|-----------------|-------------------|---------------------|----------------------|--------------|----------------|------------------------|
+|Instance120.1.txt   | 28159.0 | OPTIMAL | 75417.0 | 37 | 2147483647 | 2.91 |
+|Instance120.10.txt   | 28515.0 | OPTIMAL | 85103.0 | 34 | 2147483647 | 3.0 |
+|Instance120.2.txt   | 27095.0 | OPTIMAL | 67630.0 | 40 | 2147483647 | 2.69 |
+|Instance120.3.txt   | 27525.0 | OPTIMAL | 86778.0 | 32 | 2147483647 | 2.87 |
+|Instance120.4.txt   | 26533.0 | OPTIMAL | 82367.0 | 32 | 2147483647 | 2.73 |
+|Instance120.5.txt   | 28658.0 | OPTIMAL | 96316.0 | 30 | 2147483647 | 2.96 |
+|Instance120.6.txt   | 26902.0 | OPTIMAL | 65704.0 | 41 | 2147483647 | 2.15 |
+|Instance120.7.txt   | 28346.0 | OPTIMAL | 81866.0 | 35 | 2147483647 | 3.25 |
+|Instance120.8.txt   | 24200.0 | OPTIMAL | 70734.0 | 34 | 2147483647 | 4.78 |
+|Instance120.9.txt   | 29066.0 | OPTIMAL | 87909.0 | 33 | 2147483647 | 3.54 |
+|Instance21.1.txt   | 5441.999999999999 | OPTIMAL | 13068.0 | 42 | 2147483647 | 0.19 |
+|Instance60.1.txt   | 14093.0 | OPTIMAL | 29739.0 | 47 | 2147483647 | 1.08 |
+|Instance60.10.txt   | 14003.0 | OPTIMAL | 31809.0 | 44 | 2147483647 | 0.88 |
+|Instance60.2.txt   | 14297.0 | OPTIMAL | 27572.0 | 52 | 2147483647 | 0.58 |
+|Instance60.3.txt   | 14223.0 | OPTIMAL | 34081.0 | 42 | 2147483647 | 0.86 |
+|Instance60.4.txt   | 13505.0 | OPTIMAL | 31131.0 | 43 | 2147483647 | 0.7 |
+|Instance60.5.txt   | 14145.0 | OPTIMAL | 35693.0 | 40 | 2147483647 | 0.91 |
+|Instance60.6.txt   | 12990.0 | OPTIMAL | 25186.0 | 52 | 2147483647 | 0.82 |
+|Instance60.7.txt   | 13906.0 | OPTIMAL | 30853.0 | 45 | 2147483647 | 0.71 |
+|Instance60.8.txt   | 12821.0 | OPTIMAL | 27962.0 | 46 | 2147483647 | 0.61 |
+|Instance60.9.txt   | 15532.0 | OPTIMAL | 35492.0 | 44 | 2147483647 | 0.76 |
+|Instance90.1.txt   | 21004.0 | OPTIMAL | 50943.0 | 41 | 2147483647 | 1.96 |
+|Instance90.10.txt   | 21126.0 | OPTIMAL | 56514.0 | 37 | 2147483647 | 2.94 |
+|Instance90.2.txt   | 20672.0 | OPTIMAL | 46518.0 | 44 | 2147483647 | 2.02 |
+|Instance90.3.txt   | 20573.0 | OPTIMAL | 57613.0 | 36 | 2147483647 | 2.13 |
+|Instance90.4.txt   | 19671.0 | OPTIMAL | 53897.0 | 36 | 2147483647 | 2.16 |
+|Instance90.5.txt   | 21131.0 | OPTIMAL | 64123.0 | 33 | 2147483647 | 1.62 |
+|Instance90.6.txt   | 18659.0 | OPTIMAL | 41811.0 | 45 | 2147483647 | 1.41 |
+|Instance90.7.txt   | 21314.0 | OPTIMAL | 54913.0 | 39 | 2147483647 | 1.48 |
+|Instance90.8.txt   | 18996.0 | OPTIMAL | 49010.0 | 39 | 2147483647 | 1.56 |
+|Instance90.9.txt   | 21773.0 | OPTIMAL | 59424.0 | 37 | 2147483647 | 1.58 |
+|Toy_Instance.txt   | 1114.0 | OPTIMAL | 1788.0 | 62 | 2147483647 | 0.05 |
+
 
 ## Analyse
 

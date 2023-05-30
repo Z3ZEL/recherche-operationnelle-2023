@@ -1,5 +1,11 @@
-
+import os
 datafileName = 'Instances_ULS/Toy_Instance.txt'
+
+if(len(os.sys.argv)>1):
+    datafileName = os.sys.argv[1]
+
+
+
 
 from tool.array_printer import TwoDimArray
 
@@ -41,7 +47,7 @@ import time
 
 
 model2 = Model(name = "ULS", solver_name="CBC")
-
+model2.verbose = 0
 y = [model2.add_var(var_type=mip.BINARY, name="y_"+str(i)) for i in range(nbPeriodes)]
 x = [[model2.add_var(var_type=mip.BINARY, name="x_"+str(i)+"_"+str(j)) for i in range(j+1) ] for j in range(nbPeriodes)]
 
@@ -72,34 +78,47 @@ for i in range(nbPeriodes):
 
 
 #model2.write("test.lp")
+linear_solution = 0;
+print("| ", end="")
 
-status = model2.optimize()
-
-print("\n----------------------------------")
-if status == OptimizationStatus.OPTIMAL:
-    print("Status de la résolution: OPTIMAL")
-elif status == OptimizationStatus.FEASIBLE:
-    print("Status de la résolution: TEMPS LIMITE et SOLUTION REALISABLE CALCULEE")
-elif status == OptimizationStatus.NO_SOLUTION_FOUND:
-    print("Status de la résolution: TEMPS LIMITE et AUCUNE SOLUTION CALCULEE")
-elif status == OptimizationStatus.INFEASIBLE or status == OptimizationStatus.INT_INFEASIBLE:
-    print("Status de la résolution: IRREALISABLE")
-elif status == OptimizationStatus.UNBOUNDED:
-    print("Status de la résolution: NON BORNE")
-
+linear_status = model2.optimize(max_seconds=180, relax=True)
 if model2.num_solutions>0:
-    print("Solution calculée")
-    print("-> Valeur de la fonction objectif de la solution calculée : ",  model2.objective_value)
-    #show x i,j
-    # print("-> Valeur des variables x i,j de la solution calculée : ")
+    print(model2.objective_value, end=" | ");
+    linear_solution = model2.objective_value;
 
-    x_value = [[str(i) +' -> ' +str(j) if x[j][i].x == 1 else "X"  for i in range(j+1)] for j in range(nbPeriodes)]
-    printer = TwoDimArray(x_value,[str(i) for i in range(nbPeriodes)])
-    print(printer)
+start_time = time.time()
 
-    #show y i
-    # print("-> Valeur des variables y i de la solution calculée : ")
+status = model2.optimize(max_seconds=180)
 
+delta = time.time() - start_time
+delta = round(delta, 2)
+
+
+def str_status(status):
+    if status == OptimizationStatus.OPTIMAL:
+        return "OPTIMAL"
+    elif status == OptimizationStatus.FEASIBLE:
+        return "FEASIBLE"
+    elif status == OptimizationStatus.NO_SOLUTION_FOUND:
+        return "NO_SOLUTION_FOUND"
+    elif status == OptimizationStatus.INFEASIBLE:
+        return "INFEASIBLE"
+    elif status == OptimizationStatus.UNBOUNDED:
+        return "UNBOUNDED"
+    elif status == OptimizationStatus.NOT_SOLVED:
+        return "NOT_SOLVED"
+    elif status == OptimizationStatus.INFEASIBLE_OR_UNBOUNDED:
+        return "INFEASIBLE_OR_UNBOUNDED"
+    else:
+        return "UNKNOWN"
+                                
+if model2.num_solutions>0:
+    print(str_status(model2.status), end=" | ");
+    print(model2.objective_value, end=" | ");
+    print(round((linear_solution/model2.objective_value)*100), end=" | ");
+    #NUMBER OF NODE IN THE BRANCH AND BOUND TREE
+    print(model2.max_nodes, end=" | ");
+    print(delta, end=" |");
 
 
 
