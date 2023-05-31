@@ -57,12 +57,12 @@ avec $i \in \{0,..., n\}$
 
 Nous pouvons écrire le modèle PLNE suivant :
 
-$$
+\begin{multline}
     min \sum_{i=1}^{n} (c_{i}x_{i} + hs_{i} + f_iy_{i}) \\
     s.c. \space\space x_i \leq M y_i, \space\space \forall i \in \{0,...,n\} \\
     s_i + d_i = x_i + s_{i-1}, \space\space \forall i \in \{1,...,n\} \\
     s_0 + d_0 = x_0 \\
-  $$
+\end{multline}
 
 avec $M$ une constante suffisament grande pour que $x_i \leq M y_i$ soit toujours vérifié. Par exemple ici nous avons pris $M = \sum{d_i}$.
 
@@ -115,8 +115,10 @@ de plus nous introduisons les variables suivantes :
 Nous avons appliqué le modèle à plusieurs instances de test, et nous avons obtenu les résultats suivants, les résultats contiennent la valeur de la relaxation linéaire, la valeur et le status de la meilleure solution réalisable calculée, l'écart en \% entre la relaxation linéaire et la solution réalisable calculée, et le temps de résolution en secondes, et enfin le nombre de noeuds de l'arbre de branchement.
 
 \begin{table}[h]
-\begin{center}
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+  \centering
+  \caption[short]{Tableau contenants les résultats des instances pour le premier modèle}
+  \resizebox{\columnwidth}{!}{%
+\begin{tabular}{|c|c|c|c|c|c|c|}
 \hline
 Nom de l'instance & Relaxation Linéaire & Status de la solution & Valeur de la solution & Rapport en \% & Nombre de noeud & Temps de résolution (s)\\
 \hline
@@ -184,8 +186,9 @@ Instance90.9 & 21773.0 & REALISABLE & 60042.0 & 36 & 2147483647 & 180.26 \\
 \hline
 Toy\_Instance & 1114.0 & OPTIMALE & 1788.0 & 62 & 2147483647 & 0.09 \\
 \hline
-\end{tabular}
-\end{center}
+\end{tabular}%
+  }
+  
 \end{table}
 
 Nous avons récolté les résultats pour chacunes des variables, nous pouvons détailler celle de \textit{Toy\_Instance} :
@@ -222,8 +225,10 @@ Si vous avions étendu notre temps limite de résolution nous aurions pu dresser
 Nous avons enfin appliqué le même procédé au deuxième modèle et nous avons obtenu les résultats suivants :
 
 \begin{table}[h]
-\begin{center}
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+  \centering
+  \caption[short]{Tableau contenants les résultats des instances pour le deuxième modèle}
+  \resizebox{\columnwidth}{!}{%
+\begin{tabular}{|c|c|c|c|c|c|c|}
 \hline
 Nom de l'instance & Relaxation Linéaire & Status de la solution & Valeur de la solution & Rapport en \% & Nombre de noeud & Temps de résolution (s)\\
 \hline
@@ -291,8 +296,9 @@ Instance90.9.txt & 21773.0 & OPTIMAL & 59424.0 & 37 & 2147483647 & 1.58 \\
 \hline
 Toy\_Instance.txt & 1114.0 & OPTIMAL & 1788.0 & 62 & 2147483647 & 0.05 \\
 \hline
-\end{tabular}
-\end{center}
+\end{tabular}%
+  }
+
 \end{table}
 
 Nous pouvons voir ici que le modèle donne à tout les coups des solutions optimales dans les délais \textit{raisonnable}.
@@ -304,18 +310,20 @@ Premièrement, en regardant les valeurs obtenues, on observe que le deuxième mo
 
 Deuxièmement, en termes de temps de résolution, le deuxième modèle est également supérieur au premier. En effet, pour de nombreuses instances, le premier modèle atteint un temps de résolution de 180 secondes, ce qui est significativement plus élevé que les temps de résolution du deuxième modèle. Par exemple, pour l'instance "Instance120.1", le premier modèle prend 180.21 secondes pour trouver la solution, tandis que le deuxième modèle ne prend que 2.91 secondes.
 
-\begin{center}
-\includegraphics[max width=\textwidth]{9D8x0pnOb04nH-VZ__k-QFB-TwYsvFdQ5S8UGUK4j30_original_fullsize}
-\end{center}
+\begin{figure}
+  \centering
+  \includegraphics[max width=\textwidth]{9D8x0pnOb04nH-VZ__k-QFB-TwYsvFdQ5S8UGUK4j30_original_fullsize}
+\end{figure}
 
 En ce qui concerne le nombre de nœuds dans l'arbre de branchement, les deux modèles atteignent le maximum possible (2147483647) pour toutes les instances. Cependant, ce chiffre peut être trompeur. En effet, il est possible que ce nombre maximum soit atteint simplement parce que la limite de temps de résolution est atteinte. C'est probablement ce qui se passe pour le premier modèle, compte tenu de ses temps de résolution élevés.
 
-\begin{center}
-\includegraphics[max width=\textwidth]{FH7W_HOUq0cJPP4pauJ7B-iXxNQurcsuVAkoylhbvhU_original_fullsize}
-\end{center}
+\begin{figure}
+  \centering
+  \includegraphics[max width=\textwidth]{FH7W_HOUq0cJPP4pauJ7B-iXxNQurcsuVAkoylhbvhU_original_fullsize}
+\end{figure}
 
 Enfin, en ce qui concerne l'écart en pourcentage entre la relaxation linéaire et la solution réalisable, les deux modèles semblent similaires. Cependant, il est important de noter que dans le cas du deuxième modèle, cet écart est calculé par rapport à une solution optimale, et non pas seulement réalisable.
-
+Nous pouvons voir que globalement, cet écart qui représente la qualité de la solution trouvée, est meilleure pour le deuxième modèle.
 \section*{Conclusion}
 En conclusion, le deuxième modèle semble être supérieur au premier en termes de performance de résolution et de temps de résolution. Il serait donc recommandé d'utiliser le deuxième modèle pour résoudre ce type de problème. Cependant, il serait également intéressant d'explorer d'autres modèles ou d'améliorer ces modèles existants pour tenter de réduire davantage le temps de résolution et d'améliorer la performance de résolution.
 
