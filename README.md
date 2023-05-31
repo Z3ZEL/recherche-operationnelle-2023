@@ -177,6 +177,15 @@ Nous avons enfin appliqué le même procédé au deuxième modèle et nous avons
 
 
 ## Analyse
+Analysons les résultats obtenus de l'application des deux modèles.
+
+Premièrement, en regardant les valeurs obtenues, on observe que le deuxième modèle donne des résultats optimaux pour toutes les instances, tandis que le premier modèle donne des résultats réalisables ou optimaux, mais pas toujours. Cela indique que le deuxième modèle a une performance de résolution supérieure par rapport au premier. En d'autres termes, le deuxième modèle a une meilleure capacité à trouver la solution optimale.
+
+Deuxièmement, en termes de temps de résolution, le deuxième modèle est également supérieur au premier. En effet, pour de nombreuses instances, le premier modèle atteint un temps de résolution de 180 secondes, ce qui est significativement plus élevé que les temps de résolution du deuxième modèle. Par exemple, pour l'instance "Instance120.1", le premier modèle prend 180.21 secondes pour trouver la solution, tandis que le deuxième modèle ne prend que 2.91 secondes. 
+
+En ce qui concerne le nombre de nœuds dans l'arbre de branchement, les deux modèles atteignent le maximum possible (2147483647) pour toutes les instances. Cependant, ce chiffre peut être trompeur. En effet, il est possible que ce nombre maximum soit atteint simplement parce que la limite de temps de résolution est atteinte. C'est probablement ce qui se passe pour le premier modèle, compte tenu de ses temps de résolution élevés. 
+
+Enfin, en ce qui concerne l'écart en pourcentage entre la relaxation linéaire et la solution réalisable, les deux modèles semblent similaires. Cependant, il est important de noter que dans le cas du deuxième modèle, cet écart est calculé par rapport à une solution optimale, et non pas seulement réalisable.
 
 ## Conclusion
-
+En conclusion, le deuxième modèle semble être supérieur au premier en termes de performance de résolution et de temps de résolution. Il serait donc recommandé d'utiliser le deuxième modèle pour résoudre ce type de problème. Cependant, il serait également intéressant d'explorer d'autres modèles ou d'améliorer ces modèles existants pour tenter de réduire davantage le temps de résolution et d'améliorer la performance de résolution.
