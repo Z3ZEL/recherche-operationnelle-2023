@@ -6,3 +6,10 @@
 */.venv/
 */.eggs/
 *.lp
+
+#Latex
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
