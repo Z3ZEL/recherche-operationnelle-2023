@@ -6,6 +6,7 @@
 */.venv/
 */.eggs/
 *.lp
+/__pycache__/
 
 #Latex
 *.aux
