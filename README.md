@@ -46,10 +46,15 @@
 
 ### Deuxième modèle
 
-  Une autre alternative de considérer le problème est de le voir uniquement selon des variables binaires :
-
--  $x_{i,j}$ : 1 si on fabrique à la période *i* les produits pour la demande de la période *j*, 0 sinon. $\forall i\in\{1,\dots,n\}$ et $\forall j\in\{1,\dots,n\}$ avec $i\le{j}$
--  $y_{i}$ : 1 si on fabrique à la période *i*, 0 sinon. $\forall i\in\{1,\dots,n\}$
+ En partant de l'énnoncé du problème, et des variables suivantes :
+  - Les variables définies précedemment dans le modèle 1 ( $c_{i}$, $h$, $d_{i}$ )
+  - $x_{i,j}$ : quantité produite à la période $i$ pour la demande de la période $j$
+  - $y_{i}$ : {0,1} si il nous produisons pendant la période $j$
+  avec $i \in \{0,..., n\}$
+  
+  Et en prenant en compte les contraintes suivantes:
+  - La demande pour chaque mois j doit être satisfaite
+  - On ne peux pas profuire pour une demande future sans produire dans le mois actuel
 
 A partir de cela nous pouvons écrire le modèle PLNE suivant : 
 $$
@@ -65,10 +70,6 @@ $$
   - $c_{i}$ : coût de production à la période $i$
   - $h$ : coût de stockage (fixe)
   - $f_{i}$ : coût de mise en marche de la machine à la période $i$
-
-
-
-
 
 ## Résultats
 
